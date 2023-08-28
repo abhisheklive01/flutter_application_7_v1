@@ -23,9 +23,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
 
@@ -79,6 +76,15 @@ class Dashboard extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                 ),
+                Row(
+                  children: [
+                    Container(
+                      width: 40,
+                      height: 40,
+                      color: Colors.blue,
+                    )
+                  ],
+                )
               ],
             ),
           ),

@@ -15,6 +15,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.orange,
       body: Column(
         children: [
           Expanded(
@@ -64,6 +65,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                               textAlign: TextAlign.center,
                             ),
                           ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          DotList(),
                         ],
                       ),
                       SizedBox(
@@ -72,22 +77,112 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ],
                   ),
                 ),
-                Container(color: Colors.yellow, child: Text("Page 1")),
-                Container(color: Colors.pink, child: Text("Page 2")),
+                Container(
+                    color: Colors.yellow,
+                    child: Column(
+                      children: [
+                        Text("Page 1"),
+                      ],
+                    )),
+                Container(
+                    color: Colors.pink,
+                    child: Column(
+                      children: [
+                        Text("Page 2"),
+                        Text("Page 2"),
+                        Text("Page 2"),
+                        DotList(),
+                        Text("Page 2"),
+                      ],
+                    )),
               ],
             ),
           ),
-          IconButton(
-              color: Colors.white,
-              style: IconButton.styleFrom(backgroundColor: Colors.blue),
-              onPressed: () {
-                controller.animateToPage(currentPage + 1,
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOut);
-              },
-              icon: Icon(Icons.arrow_forward)),
+          Column(
+            children: [
+              Container(
+                height: 30,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3,
+                  itemBuilder: (context, index) {
+                    return currentPage == index ? ActiveDot() : InActiveDot();
+                  },
+                ),
+              ),
+              IconButton(
+                  color: Colors.white,
+                  style: IconButton.styleFrom(backgroundColor: Colors.blue),
+                  onPressed: () {
+                    controller.animateToPage(currentPage + 1,
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.easeInOut);
+                  },
+                  icon: Icon(Icons.arrow_forward)),
+            ],
+          ),
         ],
       ),
+    );
+  }
+}
+
+class DotList extends StatelessWidget {
+  const DotList({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ActiveDot(),
+        InActiveDot(),
+        InActiveDot(),
+        InActiveDot(),
+      ],
+    );
+  }
+}
+
+class ActiveDot extends StatelessWidget {
+  const ActiveDot({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      width: 20,
+      height: 20,
+      padding: EdgeInsets.all(2),
+      decoration: BoxDecoration(
+          border: Border.all(width: 2, color: Colors.white),
+          shape: BoxShape.circle),
+      child: Container(
+        width: 15,
+        height: 15,
+        decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+      ),
+    );
+  }
+}
+
+class InActiveDot extends StatelessWidget {
+  const InActiveDot({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      width: 15,
+      height: 15,
+      decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle),
     );
   }
 }
