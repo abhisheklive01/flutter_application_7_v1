@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'custom_scroll.dart';
+import 'grid_view_demo.dart';
 import 'onboarding.dart';
 
 // ignore_for_file: prefer_const_constructors
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         scrollBehavior: MyCustomScrollBehavior(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(useMaterial3: true),
-        home: OnboardingScreen());
+        home: GridViewDemo());
   }
 }
 
