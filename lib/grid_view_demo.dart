@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class GridViewDemo extends StatelessWidget {
-  const GridViewDemo({super.key});
-
+  GridViewDemo({super.key});
+  List foodList = [
+    {"foodName": "Bugur Larger", "price": "25", "image": "/"},
+    {"foodName": "Bugur Larger", "price": "25", "image": "/"},
+    {"foodName": "Bugur Larger", "price": "25", "image": "/"},
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,63 +44,66 @@ class GridViewDemo extends StatelessWidget {
                     }),
               ),
 
-              GridView.count(
-                padding: const EdgeInsets.all(20),
-                crossAxisSpacing: 4,
-                mainAxisSpacing: 10,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
-                children: [
-                  HomeCard(
-                    textCard: 'Hello 1',
-                    imageCard:
-                        'https://cdn.pixabay.com/photo/2018/08/26/23/55/woman-3633737_1280.jpg',
-                  ),
-                  HomeCard(
-                    textCard: 'Hello 2',
-                    imageCard: '',
-                  ),
-                  HomeCard(
-                    textCard: 'Hello 3',
-                    imageCard:
-                        'https://cdn.pixabay.com/photo/2018/08/26/23/55/woman-3633737_1280.jpg',
-                  ),
-                  HomeCard(
-                    textCard: 'Hello 4',
-                    imageCard:
-                        'https://www.thoughtco.com/thmb/pnrRIRgRS_sLqq3ywYF0UzMpby4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Getty_grammar_basics-550382899-57edc0c63df78c690f20836f.jpg',
-                  ),
-                  HomeCard(
-                    textCard: 'Hello 5',
-                    imageCard: '',
-                  ),
-                  HomeCard(
-                    textCard: 'Hello 6',
-                    imageCard: '',
-                  ),
-                  HomeCard(
-                    textCard: 'Hello 7',
-                    imageCard: '',
-                  ),
-                ],
-              )
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: GridView.builder(
-              //       shrinkWrap: true,
-              //       physics: NeverScrollableScrollPhysics(),
-              //       gridDelegate:
-              //           const SliverGridDelegateWithFixedCrossAxisCount(
-              //         crossAxisCount: 3,
-              //         crossAxisSpacing: 10,
-              //         mainAxisSpacing: 10,
-              //       ),
-              //       itemCount: 20,
-              //       itemBuilder: (BuildContext context, int index) {
-              //         return HomeCard();
-              //       }),
-              // ),
+              // GridView.count(
+              //   padding: const EdgeInsets.all(20),
+              //   crossAxisSpacing: 4,
+              //   mainAxisSpacing: 10,
+              //   shrinkWrap: true,
+              //   physics: NeverScrollableScrollPhysics(),
+              //   crossAxisCount: 2,
+              //   children: [
+              //     HomeCard(
+              //       textCard: 'Hello 1',
+              //       imageCard:
+              //           'https://cdn.pixabay.com/photo/2018/08/26/23/55/woman-3633737_1280.jpg',
+              //     ),
+              //     HomeCard(
+              //       textCard: 'Hello 2',
+              //       imageCard: '',
+              //     ),
+              //     HomeCard(
+              //       textCard: 'Hello 3',
+              //       imageCard:
+              //           'https://cdn.pixabay.com/photo/2018/08/26/23/55/woman-3633737_1280.jpg',
+              //     ),
+              //     HomeCard(
+              //       textCard: 'Hello 4',
+              //       imageCard:
+              //           'https://www.thoughtco.com/thmb/pnrRIRgRS_sLqq3ywYF0UzMpby4=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Getty_grammar_basics-550382899-57edc0c63df78c690f20836f.jpg',
+              //     ),
+              //     HomeCard(
+              //       textCard: 'Hello 5',
+              //       imageCard: '',
+              //     ),
+              //     HomeCard(
+              //       textCard: 'Hello 6',
+              //       imageCard: '',
+              //     ),
+              //     HomeCard(
+              //       textCard: 'Hello 7',
+              //       imageCard: '',
+              //     ),
+              //   ],
+              // )
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                    ),
+                    itemCount: foodList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return HomeCard(
+                        imageCard: '',
+                        textCard: foodList[index]['foodName'],
+                      );
+                    }),
+              ),
             ],
           ),
         ));
