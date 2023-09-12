@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'grid_view_demo.dart';
+
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: prefer_const_literals_to_create_immutables
 class HomeScreen extends StatelessWidget {
@@ -145,7 +147,7 @@ class ProfileCard extends StatelessWidget {
 }
 
 class Burgurs extends StatelessWidget {
-  const Burgurs({
+  Burgurs({
     super.key,
     required this.foodList,
   });
@@ -178,67 +180,95 @@ class Burgurs extends StatelessWidget {
               crossAxisSpacing: 5,
             ),
             itemBuilder: (BuildContext context, int index) {
-              return Container(
-                color: Colors.green.shade100,
-                child: Stack(
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Stack(
-                              children: [
-                                Container(
-                                  color: Colors.white,
-                                  width: double.infinity,
-                                  child: Image.network(
-                                    "${foodList[index]['image']}",
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Positioned(
-                                    right: 0,
-                                    child: IconButton(
-                                        onPressed: () {
-                                          print("check");
-                                        },
-                                        icon: Icon(Icons.favorite,
-                                            color: Colors.red)))
-                              ],
-                            ),
-                          ),
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("${foodList[index]['foodName']}"),
-                            Text("${foodList[index]['price']}"),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          height: 30,
-                          width: 30,
-                          color: Colors.black,
-                          child: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                        )),
-                  ],
-                ),
-              );
+              return BurgurCard(index: index, foodList: foodList);
             }),
       ],
+    );
+  }
+}
+
+class BurgurCard extends StatelessWidget {
+  BurgurCard({
+    super.key,
+    required this.index,
+    required this.foodList,
+  });
+
+  final int index;
+  final List foodList;
+  final List<Color> colors = [
+    Colors.red.shade100,
+    Colors.blue.shade100,
+    Colors.yellow.shade100
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => GridViewDemo()),
+        );
+      },
+      child: Container(
+        color: colors[index % 3],
+        child: Stack(
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Stack(
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          width: double.infinity,
+                          child: Image.network(
+                            "${foodList[index]['image']}",
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned(
+                            right: 0,
+                            child: IconButton(
+                                onPressed: () {
+                                  print("check");
+                                },
+                                icon: Icon(Icons.favorite, color: Colors.red)))
+                      ],
+                    ),
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("${foodList[index]['foodName']}"),
+                    Text("${foodList[index]['price']}"),
+                  ],
+                ),
+              ],
+            ),
+            Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  height: 30,
+                  width: 30,
+                  color: Colors.black,
+                  child: Icon(
+                    Icons.add,
+                    color: Colors.white,
+                  ),
+                )),
+          ],
+        ),
+      ),
     );
   }
 }
