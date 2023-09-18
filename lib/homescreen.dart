@@ -4,8 +4,14 @@ import 'grid_view_demo.dart';
 
 // ignore_for_file: prefer_const_constructors
 // ignore_for_file: prefer_const_literals_to_create_immutables
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   List foodList = [
     {
       "foodName": "Vegetable burger",
@@ -63,9 +69,12 @@ class HomeScreen extends StatelessWidget {
     },
   ];
 
+  var selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+    
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(10),
